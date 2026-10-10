@@ -1,0 +1,2 @@
+Lý do dùng COUNT(o.order_id) thay vì COUNT(*):  
+COUNT(*) đếm tất cả hàng trong nhóm sau JOIN; khi dùng LEFT JOIN, nếu bảng phụ có NULL (không có đơn hàng) thì mỗi hàng của bảng chính vẫn tồn tại và COUNT(*) sẽ đếm 1 cho mỗi hàng nhóm, gây sai lệch. COUNT(o.order_id) chỉ đếm các giá trị không NULL từ bảng Orders, do đó trả về 0 cho khách hàng chưa mua. Kết hợp LEFT JOIN + COUNT(o.order_id) đảm bảo toàn vẹn bảng trái và số lượng đơn hàng chính xác.
